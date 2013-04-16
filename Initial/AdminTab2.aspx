@@ -47,8 +47,10 @@
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
             SelectCommand="SELECT * FROM [Menu]"></asp:SqlDataSource>
         <asp:GridView ID="data" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="Item" DataSourceID="SqlDataSource1">
+            DataKeyNames="Item" DataSourceID="SqlDataSource1" AllowPaging="True" 
+            AllowSorting="True">
             <Columns>
+                <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="Item" HeaderText="Item" ReadOnly="True" 
                     SortExpression="Item" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
@@ -59,10 +61,10 @@
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString3 %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString3.ProviderName %>" 
-            SelectCommand="SELECT [Pizza], [Grinders] FROM [Sales]"></asp:SqlDataSource>
+            SelectCommand="SELECT [Item], [Quantity] FROM [Sales]"></asp:SqlDataSource>
         <asp:Chart ID="trends" runat="server" DataSourceID="SqlDataSource3">
             <series>
-                <asp:Series Name="Series1" XValueMember="Pizza" YValueMembers="Grinders">
+                <asp:Series Name="Series1" XValueMember="Item" YValueMembers="Quantity">
                 </asp:Series>
             </series>
             <chartareas>
@@ -71,8 +73,10 @@
             </chartareas>
         </asp:Chart>
         <asp:GridView ID="coupData" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="ID" DataSourceID="SqlDataSource2">
+            DataKeyNames="ID" DataSourceID="SqlDataSource2" AllowPaging="True" 
+            AllowSorting="True">
             <Columns>
+                <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                     SortExpression="ID" />
                 <asp:BoundField DataField="Discount" HeaderText="Discount" 
