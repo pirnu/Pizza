@@ -22,7 +22,35 @@
         <asp:Button ID="Feedback1" runat="server" PostBackUrl="~/Feedback.aspx" 
             Text="Feedback" />
         <br />
-        Welcome to the menu page</div>
+        Welcome to the menu page<br />
+        <br />
+        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#CC9966" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+            DataSourceID="SqlDataSource1">
+            <Columns>
+                <asp:BoundField DataField="Item" HeaderText="Item" SortExpression="Item" />
+                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
+                <asp:BoundField DataField="Description" HeaderText="Description" 
+                    SortExpression="Description" />
+            </Columns>
+            <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
+            <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
+            <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center" />
+            <RowStyle BackColor="White" ForeColor="#330099" />
+            <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
+            <SortedAscendingCellStyle BackColor="#FEFCEB" />
+            <SortedAscendingHeaderStyle BackColor="#AF0101" />
+            <SortedDescendingCellStyle BackColor="#F6F0C0" />
+            <SortedDescendingHeaderStyle BackColor="#7E0000" />
+        </asp:GridView>
+        <br />
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:ConnectionString8 %>" 
+            ProviderName="<%$ ConnectionStrings:ConnectionString8.ProviderName %>" 
+            SelectCommand="SELECT [Item], [Price], [Description] FROM [Menu]">
+        </asp:SqlDataSource>
+    </div>
     </form>
 </body>
 </html>

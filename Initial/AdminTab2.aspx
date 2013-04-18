@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="font-size: x-large">
+    <div style="font-size: x-large" dir="ltr">
     
         Admin Page<br />
         <br />
@@ -42,26 +42,48 @@
 &nbsp;&nbsp;&nbsp;
         <asp:Button ID="fbdeny" runat="server" Text="Deny" />
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            SelectCommand="SELECT * FROM [Menu]"></asp:SqlDataSource>
-        <asp:GridView ID="data" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="Item" DataSourceID="SqlDataSource1" AllowPaging="True" 
-            AllowSorting="True">
+
+        <asp:GridView ID="data" runat="server" AutoGenerateColumns="False"
+            DataKeyNames="Index" DataSourceID="SqlDataSource1" BackColor="White" 
+            BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
+            onrowcancelingedit="StayVisible" onrowdeleting="StayVisible" 
+            onrowediting="StayVisible" onrowupdated="StayVisible">
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="Item" HeaderText="Item" ReadOnly="True" 
-                    SortExpression="Item" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
+                    SortExpression="Index" />
+                <asp:BoundField DataField="Item" HeaderText="Item" SortExpression="Item" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
             </Columns>
+            <FooterStyle BackColor="White" ForeColor="#000066" />
+            <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+            <RowStyle ForeColor="#000066" />
+            <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+            <SortedAscendingHeaderStyle BackColor="#007DBB" />
+            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+            <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString3 %>" 
-            ProviderName="<%$ ConnectionStrings:ConnectionString3.ProviderName %>" 
-            SelectCommand="SELECT [Item], [Quantity] FROM [Sales]"></asp:SqlDataSource>
+
+        <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" 
+            DataKeyNames="Index" DataSourceID="SqlDataSource1" Height="50px" 
+            Width="125px" oniteminserted="StayMoreVisible">
+            <Fields>
+                <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
+                    SortExpression="Index" />
+                <asp:BoundField DataField="Item" HeaderText="Item" SortExpression="Item" />
+                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
+                <asp:BoundField DataField="Description" HeaderText="Description" 
+                    SortExpression="Description" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
+                    ShowInsertButton="True" />
+            </Fields>
+        </asp:DetailsView>
+        <br />
+
         <asp:Chart ID="trends" runat="server" DataSourceID="SqlDataSource3">
             <series>
                 <asp:Series Name="Series1" XValueMember="Item" YValueMembers="Quantity">
@@ -76,7 +98,6 @@
             DataKeyNames="ID" DataSourceID="SqlDataSource2" AllowPaging="True" 
             AllowSorting="True">
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                     SortExpression="ID" />
                 <asp:BoundField DataField="Discount" HeaderText="Discount" 
@@ -84,10 +105,44 @@
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" 
-            ProviderName="<%$ ConnectionStrings:ConnectionString2.ProviderName %>" 
+            ConnectionString="<%$ ConnectionStrings:ConnectionString6 %>" 
+            ProviderName="<%$ ConnectionStrings:ConnectionString6.ProviderName %>" 
             SelectCommand="SELECT * FROM [Coupons]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:ConnectionString5 %>" 
+            ProviderName="<%$ ConnectionStrings:ConnectionString5.ProviderName %>" 
+            SelectCommand="SELECT * FROM [Sales]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
+            DeleteCommand="DELETE FROM [Menu] WHERE [Index] = ?" 
+            InsertCommand="INSERT INTO [Menu] ([Index], [Item], [Price], [Description]) VALUES (?, ?, ?, ?)" 
+            ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
+            SelectCommand="SELECT * FROM [Menu] ORDER BY [Index]" 
+            
+            
+            
+            UpdateCommand="UPDATE [Menu] SET [Item] = ?, [Price] = ?, [Description] = ? WHERE [Index] = ?">
+            <DeleteParameters>
+                <asp:Parameter Name="Index" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="Index" Type="Int32" />
+                <asp:Parameter Name="Item" Type="String" />
+                <asp:Parameter Name="Price" Type="Double" />
+                <asp:Parameter Name="Description" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="Item" Type="String" />
+                <asp:Parameter Name="Price" Type="Double" />
+                <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="Index" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
         <br /></div>
+        <div>
+            <p style="text-align:right;">
+            <asp:Button ID="btnAdd" runat="Server" Text="Add New Record" OnClick="AddNewRecord" /></p>
+        </div>
     </form>
 </body>
 </html>
