@@ -5,24 +5,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        #form1
+        {
+            width: 962px;
+        }
+        .style1
+        {
+            width: 894px;
+            height: 328px;
+            margin-left: 80px;
+        }
+        .style2
+        {
+            width: 211px;
+            height: 90px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:Button ID="Home1" runat="server" PostBackUrl="~/Default.aspx" 
-        Text="Home" />
+    <p class="style1">
+        <asp:Button ID="Home1" runat="server" PostBackUrl="~/Default.aspx" 
+        Text="Home" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
+            Font-Bold="True" Font-Size="16pt" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="Order1" runat="server" PostBackUrl="~/Order.aspx" 
-        Text="Order" />
-    <asp:Button ID="Menu1" runat="server" PostBackUrl="~/Menu.aspx" Text="Menu" />
+        Text="Order" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
+            Font-Bold="True" Font-Size="16pt" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="Menu1" runat="server" PostBackUrl="~/Menu.aspx" Text="Menu" 
+            BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" Font-Bold="True" 
+            Font-Size="16pt" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="Coupons1" runat="server" PostBackUrl="~/Coupons.aspx" 
-        Text="Coupons" />
+        Text="Coupons" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
+            Font-Bold="True" Font-Size="16pt" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="About1" runat="server" PostBackUrl="~/About.aspx" 
-        Text="About" />
+        Text="About" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
+            Font-Bold="True" Font-Size="16pt" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="Feedback1" runat="server" PostBackUrl="~/Feedback.aspx" 
-        Text="Feedback" />
-    <br />
-    Welcome to the feedback page<div>
+        Text="Feedback" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
+            Font-Bold="True" Font-Size="16pt" ForeColor="White" />
+        <br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <asp:Label ID="Label1" runat="server" Text="Feedback From:" Visible="False"></asp:Label>
+        <asp:Label ID="namelabel" runat="server" Visible="False"></asp:Label>
+        <br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="fbtext" runat="server" Height="65px" TextMode="MultiLine" 
+            Width="301px" Visible="False" ontextchanged="fbtext_TextChanged"></asp:TextBox>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+            Text="Click Here to View Customer Feedback" Width="401px" BackColor="Blue" 
+            BorderColor="Black" BorderStyle="Solid" Font-Bold="True" Font-Size="16pt" 
+            ForeColor="White" Height="49px" />
     
-    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img class="style2" src="Images/Feedback%20logo.GIF" /></p>
     </form>
+
 </body>
 </html>
