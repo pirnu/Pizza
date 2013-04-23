@@ -47,7 +47,8 @@
             DataKeyNames="Index" DataSourceID="SqlDataSource1" BackColor="White" 
             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
             onrowcancelingedit="StayVisible" onrowdeleting="StayVisible" 
-            onrowediting="StayVisible" onrowupdated="StayVisible">
+            onrowediting="StayVisible" onrowupdated="StayVisible" 
+            onrowdeleted="StayVisible">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
@@ -56,6 +57,8 @@
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
+                <asp:BoundField DataField="Category" HeaderText="Category" 
+                    SortExpression="Category" />
             </Columns>
             <FooterStyle BackColor="White" ForeColor="#000066" />
             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -78,8 +81,8 @@
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-                    ShowInsertButton="True" />
+                <asp:BoundField DataField="Category" HeaderText="Category" 
+                    SortExpression="Category" />
             </Fields>
         </asp:DetailsView>
         <br />
@@ -115,13 +118,14 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
             DeleteCommand="DELETE FROM [Menu] WHERE [Index] = ?" 
-            InsertCommand="INSERT INTO [Menu] ([Index], [Item], [Price], [Description]) VALUES (?, ?, ?, ?)" 
+            InsertCommand="INSERT INTO [Menu] ([Index], [Item], [Price], [Description], [Category]) VALUES (?, ?, ?, ?, ?)" 
             ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
             SelectCommand="SELECT * FROM [Menu] ORDER BY [Index]" 
             
             
             
-            UpdateCommand="UPDATE [Menu] SET [Item] = ?, [Price] = ?, [Description] = ? WHERE [Index] = ?">
+            
+            UpdateCommand="UPDATE [Menu] SET [Item] = ?, [Price] = ?, [Description] = ?, [Category] = ? WHERE [Index] = ?">
             <DeleteParameters>
                 <asp:Parameter Name="Index" Type="Int32" />
             </DeleteParameters>
@@ -130,11 +134,13 @@
                 <asp:Parameter Name="Item" Type="String" />
                 <asp:Parameter Name="Price" Type="Double" />
                 <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="Category" Type="String" />
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Item" Type="String" />
                 <asp:Parameter Name="Price" Type="Double" />
                 <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="Category" Type="String" />
                 <asp:Parameter Name="Index" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>

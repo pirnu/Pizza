@@ -5,10 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .style1
+        {
+            font-family: "Comic Sans MS";
+        }
+        .style2
+        {
+            font-size: xx-large;
+            font-family: "Segoe Script";
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div style="background-color: #FF0000">
     
         <asp:Button ID="Home1" runat="server" PostBackUrl="~/Default.aspx" 
             Text="Home" />
@@ -22,7 +33,10 @@
         <asp:Button ID="Feedback1" runat="server" PostBackUrl="~/Feedback.aspx" 
             Text="Feedback" />
         <br />
-        Welcome to the menu page<br />
+        <span class="style1">
+        <br />
+        <br />
+        </span><span class="style2">Welcome to the menu page</span><br />
         <br />
         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#CC9966" 
@@ -33,6 +47,8 @@
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
+                <asp:BoundField DataField="Category" HeaderText="Category" 
+                    SortExpression="Category" />
             </Columns>
             <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
@@ -48,7 +64,8 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString8 %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString8.ProviderName %>" 
-            SelectCommand="SELECT [Item], [Price], [Description] FROM [Menu]">
+            
+            SelectCommand="SELECT [Item], [Price], [Description], [Category] FROM [Menu] ORDER BY [Index]">
         </asp:SqlDataSource>
     </div>
     </form>
