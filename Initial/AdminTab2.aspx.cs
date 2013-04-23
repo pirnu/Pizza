@@ -10,10 +10,7 @@ public partial class AdminTab2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        fblabel.Visible = false;
-        fbtext.Visible = false;
-        fbapprove.Visible = false;
-        fbdeny.Visible = false;
+        FBGrid.Visible = false;
         data.Visible = false;
         trends.Visible = false;
         coupData.Visible = false;
@@ -22,17 +19,12 @@ public partial class AdminTab2 : System.Web.UI.Page
     }
     protected void fbbutton_Click(object sender, EventArgs e)
     {
-        fblabel.Visible = true;
-        fbtext.Visible = true;
-        fbapprove.Visible = true;
-        fbdeny.Visible = true;
+        FBGrid.Visible = true; 
     }
     protected void menuButton_Click(object sender, EventArgs e)
     {
         data.Visible = true;
         btnAdd.Visible = true;
-        
-
     }
     protected void coupButton_Click(object sender, EventArgs e)
     {
@@ -61,4 +53,13 @@ public partial class AdminTab2 : System.Web.UI.Page
         btnAdd.Visible = true;
         DetailsView1.Visible = true;
     }
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void row_edit(object sender, EventArgs e)
+    {
+        FBGrid.Visible = true;
+    }
+
 }

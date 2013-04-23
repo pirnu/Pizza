@@ -30,25 +30,61 @@
             Text="Back to Home" />
         <br />
         <br />
+        <asp:GridView ID="FBGrid" runat="server" AutoGenerateColumns="False" 
+            DataKeyNames="Index" DataSourceID="AccessDataSource1" 
+            onrowcancelingedit="row_edit" onrowdeleted="row_edit" onrowdeleting="row_edit" 
+            onrowediting="row_edit" onrowupdated="row_edit" onrowupdating="row_edit" 
+            onselectedindexchanged="GridView1_SelectedIndexChanged">
+            <Columns>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
+                    SortExpression="Index" />
+                <asp:BoundField DataField="CusName" HeaderText="CusName" 
+                    SortExpression="CusName" />
+                <asp:BoundField DataField="Feedback" HeaderText="Feedback" 
+                    SortExpression="Feedback" />
+                <asp:BoundField DataField="Status" HeaderText="Status" 
+                    SortExpression="Status" />
+                <asp:BoundField DataField="TheDate" HeaderText="TheDate" 
+                    SortExpression="TheDate" />
+            </Columns>
+        </asp:GridView>
+        <asp:AccessDataSource ID="AccessDataSource1" runat="server" 
+            DataFile="~/App_Data/FBDB.accdb" 
+            DeleteCommand="DELETE FROM [feedback] WHERE [Index] = ?" 
+            InsertCommand="INSERT INTO [feedback] ([Index], [CusName], [Feedback], [Status], [TheDate]) VALUES (?, ?, ?, ?, ?)" 
+            SelectCommand="SELECT * FROM [feedback] ORDER BY [Index]" 
+            UpdateCommand="UPDATE [feedback] SET [CusName] = ?, [Feedback] = ?, [Status] = ?, [TheDate] = ? WHERE [Index] = ?">
+            <DeleteParameters>
+                <asp:Parameter Name="Index" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="Index" Type="Int32" />
+                <asp:Parameter Name="CusName" Type="String" />
+                <asp:Parameter Name="Feedback" Type="String" />
+                <asp:Parameter Name="Status" Type="String" />
+                <asp:Parameter Name="TheDate" Type="DateTime" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="CusName" Type="String" />
+                <asp:Parameter Name="Feedback" Type="String" />
+                <asp:Parameter Name="Status" Type="String" />
+                <asp:Parameter Name="TheDate" Type="DateTime" />
+                <asp:Parameter Name="Index" Type="Int32" />
+            </UpdateParameters>
+        </asp:AccessDataSource>
         <br />
-        <asp:Label ID="fblabel" runat="server" style="font-size: medium" 
-            Text="Feedback"></asp:Label>
         <br />
-        <asp:TextBox ID="fbtext" runat="server" Height="65px" TextMode="MultiLine" 
-            Width="301px"></asp:TextBox>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
-        <asp:Button ID="fbapprove" runat="server" Text="Approve" />
 &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="fbdeny" runat="server" Text="Deny" />
         <br />
 
         <asp:GridView ID="data" runat="server" AutoGenerateColumns="False"
             DataKeyNames="Index" DataSourceID="SqlDataSource1" BackColor="White" 
             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
             onrowcancelingedit="StayVisible" onrowdeleting="StayVisible" 
-            onrowediting="StayVisible" onrowupdated="StayVisible" 
-            onrowdeleted="StayVisible">
+            onrowediting="StayVisible" onrowupdated="StayVisible">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
@@ -57,8 +93,6 @@
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
-                <asp:BoundField DataField="Category" HeaderText="Category" 
-                    SortExpression="Category" />
             </Columns>
             <FooterStyle BackColor="White" ForeColor="#000066" />
             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -81,8 +115,8 @@
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                 <asp:BoundField DataField="Description" HeaderText="Description" 
                     SortExpression="Description" />
-                <asp:BoundField DataField="Category" HeaderText="Category" 
-                    SortExpression="Category" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
+                    ShowInsertButton="True" />
             </Fields>
         </asp:DetailsView>
         <br />
@@ -118,14 +152,13 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
             DeleteCommand="DELETE FROM [Menu] WHERE [Index] = ?" 
-            InsertCommand="INSERT INTO [Menu] ([Index], [Item], [Price], [Description], [Category]) VALUES (?, ?, ?, ?, ?)" 
+            InsertCommand="INSERT INTO [Menu] ([Index], [Item], [Price], [Description]) VALUES (?, ?, ?, ?)" 
             ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
             SelectCommand="SELECT * FROM [Menu] ORDER BY [Index]" 
             
             
             
-            
-            UpdateCommand="UPDATE [Menu] SET [Item] = ?, [Price] = ?, [Description] = ?, [Category] = ? WHERE [Index] = ?">
+            UpdateCommand="UPDATE [Menu] SET [Item] = ?, [Price] = ?, [Description] = ? WHERE [Index] = ?">
             <DeleteParameters>
                 <asp:Parameter Name="Index" Type="Int32" />
             </DeleteParameters>
@@ -134,13 +167,11 @@
                 <asp:Parameter Name="Item" Type="String" />
                 <asp:Parameter Name="Price" Type="Double" />
                 <asp:Parameter Name="Description" Type="String" />
-                <asp:Parameter Name="Category" Type="String" />
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Item" Type="String" />
                 <asp:Parameter Name="Price" Type="Double" />
                 <asp:Parameter Name="Description" Type="String" />
-                <asp:Parameter Name="Category" Type="String" />
                 <asp:Parameter Name="Index" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
