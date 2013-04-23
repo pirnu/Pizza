@@ -17,6 +17,7 @@ public partial class AdminTab2 : System.Web.UI.Page
         coupData.Visible = false;
         DetailsView1.Visible = false;
         btnAdd.Visible = false;
+        Calendar1.Visible = false;
     }
     protected void fbbutton_Click(object sender, EventArgs e)
     {
@@ -34,6 +35,7 @@ public partial class AdminTab2 : System.Web.UI.Page
     protected void trendButton_Click(object sender, EventArgs e)
     {
         trends.Visible = true;
+        Calendar1.Visible = true;
     }
     // Show Add new record
     protected void AddNewRecord(object sender, EventArgs e)
@@ -85,5 +87,23 @@ public partial class AdminTab2 : System.Web.UI.Page
                 e.Row.BackColor = Color.Tomato;
             }
         }
+    }
+    protected void SelectDate(object sender, EventArgs e)
+    {
+        trends.Visible = true;
+        Calendar1.Visible = true;
+        string date = Calendar1.SelectedDate.Date.ToString("MM/dd/yyyy");
+        string query;
+
+
+        query = "SELECT [Category], [Quantity] FROM [Sales] WHERE [NotDate] = '" + date + "'";
+        SqlDataSource3.SelectCommand = query;
+        trends.DataBind();
+
+    }
+    protected void Visible(object sender, MonthChangedEventArgs e)
+    {
+        trends.Visible = true;
+        Calendar1.Visible = true;
     }
 }

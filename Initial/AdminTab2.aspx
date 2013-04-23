@@ -120,6 +120,8 @@
                     ShowInsertButton="True" />
             </Fields>
         </asp:DetailsView>
+        <asp:Calendar ID="Calendar1" runat="server" onselectionchanged="SelectDate" 
+            SelectedDate="2013-04-08" onvisiblemonthchanged="Visible"></asp:Calendar>
         <br />
 
         <asp:Chart ID="trends" runat="server" DataSourceID="SqlDataSource3">
@@ -149,7 +151,7 @@
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString5 %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString5.ProviderName %>" 
-            SelectCommand="SELECT [Category], [Quantity] FROM [Sales]"></asp:SqlDataSource>
+            SelectCommand="SELECT [Category], [Quantity] FROM [Sales] WHERE [NotDate] = '04/08/2013'"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
             DeleteCommand="DELETE FROM [Menu] WHERE [Index] = ?" 
