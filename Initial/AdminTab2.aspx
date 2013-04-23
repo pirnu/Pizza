@@ -34,7 +34,8 @@
             DataKeyNames="Index" DataSourceID="AccessDataSource1" 
             onrowcancelingedit="row_edit" onrowdeleted="row_edit" onrowdeleting="row_edit" 
             onrowediting="row_edit" onrowupdated="row_edit" onrowupdating="row_edit" 
-            onselectedindexchanged="GridView1_SelectedIndexChanged">
+            onselectedindexchanged="GridView1_SelectedIndexChanged" 
+            onrowdatabound="Feedback_RDB">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 
@@ -123,7 +124,7 @@
 
         <asp:Chart ID="trends" runat="server" DataSourceID="SqlDataSource3">
             <series>
-                <asp:Series Name="Series1" XValueMember="Item" YValueMembers="Quantity">
+                <asp:Series Name="Series1" XValueMember="Category" YValueMembers="Quantity">
                 </asp:Series>
             </series>
             <chartareas>
@@ -148,7 +149,7 @@
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString5 %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString5.ProviderName %>" 
-            SelectCommand="SELECT * FROM [Sales]"></asp:SqlDataSource>
+            SelectCommand="SELECT [Category], [Quantity] FROM [Sales]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
             DeleteCommand="DELETE FROM [Menu] WHERE [Index] = ?" 

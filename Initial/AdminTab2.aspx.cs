@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 public partial class AdminTab2 : System.Web.UI.Page
 {
@@ -62,4 +63,27 @@ public partial class AdminTab2 : System.Web.UI.Page
         FBGrid.Visible = true;
     }
 
+    protected void Feedback_RDB(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // determine the value of the UnitsInStock field
+            string status = DataBinder.Eval(e.Row.DataItem, "Status").ToString();
+            if (status == "Pending")
+            {
+                // color the background of the row yellow
+                e.Row.BackColor = Color.Goldenrod;
+            }
+            else if (status == "Approved")
+            {
+                // color the background of the row green
+                e.Row.BackColor = Color.DarkSeaGreen;
+            }
+            else
+            {
+                // color the background of the row red
+                e.Row.BackColor = Color.Tomato;
+            }
+        }
+    }
 }
