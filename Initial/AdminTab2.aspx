@@ -34,7 +34,8 @@
             DataKeyNames="Index" DataSourceID="AccessDataSource1" 
             onrowcancelingedit="row_edit" onrowdeleted="row_edit" onrowdeleting="row_edit" 
             onrowediting="row_edit" onrowupdated="row_edit" onrowupdating="row_edit" 
-            onselectedindexchanged="GridView1_SelectedIndexChanged">
+            onselectedindexchanged="GridView1_SelectedIndexChanged" 
+            onrowdatabound="feedback_RDB">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="Index" HeaderText="Index" ReadOnly="True" 

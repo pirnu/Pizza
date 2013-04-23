@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 public partial class AdminTab2 : System.Web.UI.Page
 {
@@ -62,4 +63,23 @@ public partial class AdminTab2 : System.Web.UI.Page
         FBGrid.Visible = true;
     }
 
+    protected void feedback_RDB(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            string status = DataBinder.Eval(e.Row.DataItem, "Status").ToString();
+            if (status == "Pending")
+            {
+                e.Row.BackColor = Color.Goldenrod;
+            }
+            else if (status == "Approved")
+            {
+                e.Row.BackColor = Color.DarkSeaGreen;
+            }
+            else
+            {
+                e.Row.BackColor = Color.Tomato;
+            }
+        }
+    }
 }
