@@ -16,6 +16,11 @@ public partial class Feedback : System.Web.UI.Page
     public OleDbCommand c_command;
     public OleDbDataReader thereader;
 
+    OleDbConnection conn; //connects program to DB
+    string connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= |DataDirectory|\\FBDB.accdb;Persist Security Info=False"; // Security Info=False"; //DB info so program can connect to it
+    string query; //string to hold SQL query
+    OleDbDataReader rdr; //temporary holding place for data from DB
+
     private string[] Names = new string[10];
     private string[] feedback = new string[10];
 
@@ -28,7 +33,7 @@ public partial class Feedback : System.Web.UI.Page
         //Links the AnalysisDB to the program, creates a new data set and stores all the data from
         //the table inside
         c_connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= |DataDirectory|\\FBDB.accdb;Persist Security Info=False";
-        c_query = "SELECT * from feedback WHERE Status = 'Pending'";
+        c_query = "SELECT * from feedback WHERE Status = 'Approved'";
         c_connect = new OleDbConnection(c_connString);
         c_command = new OleDbCommand(c_query, c_connect);
         c_connect.Open();
@@ -36,10 +41,25 @@ public partial class Feedback : System.Web.UI.Page
 
         while (thereader.Read())
         {
-            Names[i] = thereader.GetString(0);
-            feedback[i] = thereader.GetString(1);
+            Names[i] = thereader.GetString(1);
+            feedback[i] = thereader.GetString(2);
             i++;
         }
+
+        //DB Step 3: Connect to Database
+        conn = new OleDbConnection(connString); //code that actually executes link
+        conn.Open(); //and then open it
+
+        //GET # OF VOTES TO DISPLAY
+        //sql command to select everything from the votes table    
+        query = "SELECT * FROM feedback";
+        OleDbCommand cmd = new OleDbCommand(query, conn); //actually apply query to DB
+        using (conn)
+        {
+            //execute the qeury and store the results in our OleDbDataReader        
+            rdr = cmd.ExecuteReader();
+        }
+        conn.Close(); //Always want to close connection to outside files
     }
 
     protected void Button1_Click(object sender, EventArgs e)
@@ -66,6 +86,25 @@ public partial class Feedback : System.Web.UI.Page
     }
     protected void fbtext_TextChanged(object sender, EventArgs e)
     {
+
+    }
+
+    protected void Feedbackbut_Click(object sender, EventArgs e)
+    {
+        //DB Step 3: Connect to Database
+        conn = new OleDbConnection(connString); //code that actually executes link
+        conn.Open(); //and then opens it
+
+        //sql command to see if name already exists in the DB     
+        OleDbCommand cmd = new OleDbCommand("SELECT * FROM feedback", conn);
+
+        cmd = new OleDbCommand("INSERT INTO feedback (CusName, Feedback, Status, TheDate) VALUES ('" + TextBox1.Text + "','" + TextBox2.Text + "','Pending','" + DateTime.Now.ToShortDateString() + "')", conn);
+        cmd.ExecuteNonQuery();
+
+        conn.Close();
+
+        TextBox1.Text = "";
+        TextBox2.Text = "";
 
     }
 }

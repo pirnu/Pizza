@@ -12,20 +12,20 @@
         }
         .style1
         {
-            width: 894px;
-            height: 328px;
+            width: 1026px;
+            height: 510px;
             margin-left: 80px;
         }
         .style2
         {
-            width: 211px;
-            height: 90px;
+            width: 136px;
+            height: 78px;
         }
     </style>
 </head>
-<body>
+<body style="height: 469px">
     <form id="form1" runat="server">
-    <p class="style1">
+    <p class="style1" dir="ltr">
         <asp:Button ID="Home1" runat="server" PostBackUrl="~/Default.aspx" 
         Text="Home" BackColor="#FF6600" BorderColor="Black" BorderStyle="Double" 
             Font-Bold="True" Font-Size="16pt" />
@@ -62,14 +62,32 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+&nbsp;&nbsp;&nbsp;&nbsp;<img class="style2" src="Images/Feedback%20logo.GIF" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
             Text="Click Here to View Customer Feedback" Width="401px" BackColor="Blue" 
             BorderColor="Black" BorderStyle="Solid" Font-Bold="True" Font-Size="16pt" 
             ForeColor="White" Height="49px" />
     
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <img class="style2" src="Images/Feedback%20logo.GIF" /></p>
+        </p>
+    <p class="style1" align="center">
+    
+        We appreciate your feedback!!<br />
+        <br />
+        Name:<br />
+    
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <br />
+        <br />
+        Feedback:<br />
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <br />
+    
+        <br />
+        <asp:Button ID="Feedbackbut" runat="server" onclick="Feedbackbut_Click" 
+            Text="Submit" />
+    
+        <br />
+        **Please note that feedback must await moderator approval to be displayed**</p>
     </form>
 
 </body>
